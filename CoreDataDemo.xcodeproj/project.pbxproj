@@ -40,7 +40,6 @@
 		D507F529284CBF6300A9A938 = {
 			isa = PBXGroup;
 			children = (
-				D5F708D0284F62A400CBB5DB /* StorageManager.swift */,
 				D507F534284CBF6300A9A938 /* CoreDataDemo */,
 				D507F533284CBF6300A9A938 /* Products */,
 			);
@@ -57,14 +56,47 @@
 		D507F534284CBF6300A9A938 /* CoreDataDemo */ = {
 			isa = PBXGroup;
 			children = (
-				D507F535284CBF6300A9A938 /* AppDelegate.swift */,
+				D54717922850D7700025DC01 /* Data */,
+				D54717912850D6FA0025DC01 /* App */,
 				D5F708CF284F626600CBB5DB /* ViewControllers */,
-				D507F541284CBF6300A9A938 /* Assets.xcassets */,
-				D507F543284CBF6300A9A938 /* LaunchScreen.storyboard */,
-				D507F546284CBF6300A9A938 /* Info.plist */,
-				D507F53E284CBF6300A9A938 /* CoreDataDemo.xcdatamodeld */,
+				D54717902850D6EA0025DC01 /* Resources */,
+				D547178F2850D6D60025DC01 /* StoryBoards */,
 			);
 			path = CoreDataDemo;
+			sourceTree = "<group>";
+		};
+		D547178F2850D6D60025DC01 /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				D507F543284CBF6300A9A938 /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		D54717902850D6EA0025DC01 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D507F541284CBF6300A9A938 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D54717912850D6FA0025DC01 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D507F535284CBF6300A9A938 /* AppDelegate.swift */,
+				D507F546284CBF6300A9A938 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D54717922850D7700025DC01 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				D5F708D0284F62A400CBB5DB /* StorageManager.swift */,
+				D507F53E284CBF6300A9A938 /* CoreDataDemo.xcdatamodeld */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		D5F708CF284F626600CBB5DB /* ViewControllers */ = {
@@ -289,7 +321,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 586H9K983F;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CoreDataDemo/Info.plist;
+				INFOPLIST_FILE = CoreDataDemo/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -316,7 +348,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 586H9K983F;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CoreDataDemo/Info.plist;
+				INFOPLIST_FILE = CoreDataDemo/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

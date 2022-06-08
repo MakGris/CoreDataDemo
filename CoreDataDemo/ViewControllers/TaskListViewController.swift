@@ -22,9 +22,9 @@ class TaskListViewController: UITableViewController {
         StorageManager.shared.fetchData { fetchedTasks in
             self.taskList = fetchedTasks
         }
-            }
-
-
+    }
+    
+    
     
     //MARK: - Private Methods
     private func setupNavigationBar() {
@@ -54,11 +54,15 @@ class TaskListViewController: UITableViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
     }
     @objc private func addNewTask() {
-        showAddAlert(with: "New Task", and: "What do you want to do?")
+        showAddAlert()
     }
     
-    private func showAddAlert(with title: String, and message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    private func showAddAlert() {
+        let alert = UIAlertController(
+            title: "New Task",
+            message: "What do you want to do?",
+            preferredStyle: .alert
+        )
         let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
             guard let task = alert.textFields?.first?.text, !task.isEmpty else { return }
             StorageManager.shared.save(task) { task in
@@ -75,11 +79,15 @@ class TaskListViewController: UITableViewController {
         }
         present(alert, animated: true)
     }
-    private func showEditAlert(with title: String, and message: String, and editTask: Task) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    private func showEditAlert(task: Task) {
+        let alert = UIAlertController(
+            title: "Edit Task",
+            message: "Please edit your task",
+            preferredStyle: .alert
+        )
         let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
             guard let taskTitle = alert.textFields?.first?.text, !taskTitle.isEmpty else { return }
-            editTask.title = taskTitle
+            task.title = taskTitle
             StorageManager.shared.saveContext()
             self.tableView.reloadData()
         }
@@ -109,9 +117,13 @@ extension TaskListViewController {
         cell.contentConfiguration = content
         return cell
     }
-
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, actionPerformed: (Bool) -> ()) in
+    
+    override func tableView(
+        _ tableView: UITableView,
+        trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
+    ) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
+            (_, _, actionPerformed: (Bool) -> ()) in
             let task = self.taskList[indexPath.row]
             StorageManager.shared.context.delete(task)
             self.taskList.remove(at: indexPath.row)
@@ -120,9 +132,10 @@ extension TaskListViewController {
             actionPerformed(true)
         }
         deleteAction.backgroundColor = UIColor.red
-        let editAction = UIContextualAction(style: .normal, title: "Edit") { (_, _, actionPerformed: (Bool) -> ()) in
+        let editAction = UIContextualAction(style: .normal, title: "Edit") {
+            (_, _, actionPerformed: (Bool) -> ()) in
             let editTask = self.taskList[indexPath.row]
-            self.showEditAlert(with: "Edit Task", and: "Please edit your task", and: editTask)
+            self.showEditAlert(task: editTask)
             actionPerformed(true)
         }
         editAction.backgroundColor = UIColor.green
