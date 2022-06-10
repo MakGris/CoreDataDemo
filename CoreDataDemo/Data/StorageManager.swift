@@ -23,11 +23,11 @@ class StorageManager {
         return container
     }()
     
-    var context: NSManagedObjectContext {
-        return persistentContainer.viewContext
+    private var context: NSManagedObjectContext {
+        persistentContainer.viewContext
     }
     
-    func fetchData(completion: @escaping([Task]) -> Void) {
+    func fetchData(completion: ([Task]) -> Void) {
         let fetchRequest = Task.fetchRequest()
         
         do {
@@ -48,7 +48,7 @@ class StorageManager {
         }
     }
     
-    func save(_ taskName: String, completion: @escaping(Task) -> Void) {
+    func save(_ taskName: String, completion: (Task) -> Void) {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "Task", in: context) else { return }
         guard let task = NSManagedObject(entity: entityDescription, insertInto: context) as? Task else { return }
         task.title = taskName
