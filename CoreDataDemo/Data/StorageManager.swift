@@ -26,17 +26,17 @@ class StorageManager {
     var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
-   
+    
     func fetchData(completion: @escaping([Task]) -> Void) {
         let fetchRequest = Task.fetchRequest()
         
-                do {
-                    let taskList = try context.fetch(fetchRequest)
-                    completion(taskList)
-                } catch let error {
-                    print("Failed to fetch data", error)
-                }
-            }
+        do {
+            let taskList = try context.fetch(fetchRequest)
+            completion(taskList)
+        } catch let error {
+            print("Failed to fetch data", error)
+        }
+    }
     
     func saveContext () {
         if context.hasChanges {
@@ -49,12 +49,20 @@ class StorageManager {
     }
     
     func save(_ taskName: String, completion: @escaping(Task) -> Void) {
-            guard let entityDescription = NSEntityDescription.entity(forEntityName: "Task", in: context) else { return }
-            guard let task = NSManagedObject(entity: entityDescription, insertInto: context) as? Task else { return }
-            task.title = taskName
-            completion(task)
-            saveContext()
-        }
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: "Task", in: context) else { return }
+        guard let task = NSManagedObject(entity: entityDescription, insertInto: context) as? Task else { return }
+        task.title = taskName
+        completion(task)
+        saveContext()
     }
-    
+    func edit(_ task: Task, newName: String) {
+        task.title = newName
+        saveContext()
+    }
+    func delete(_ task: Task) {
+        context.delete(task)
+        saveContext()
+    }
+}
+
 

@@ -87,8 +87,7 @@ class TaskListViewController: UITableViewController {
         )
         let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
             guard let taskTitle = alert.textFields?.first?.text, !taskTitle.isEmpty else { return }
-            task.title = taskTitle
-            StorageManager.shared.saveContext()
+            StorageManager.shared.edit(task, newName: taskTitle)
             self.tableView.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
@@ -125,10 +124,9 @@ extension TaskListViewController {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") {
             (_, _, actionPerformed: (Bool) -> ()) in
             let task = self.taskList[indexPath.row]
-            StorageManager.shared.context.delete(task)
+            StorageManager.shared.delete(task)
             self.taskList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            StorageManager.shared.saveContext()
             actionPerformed(true)
         }
         deleteAction.backgroundColor = UIColor.red
